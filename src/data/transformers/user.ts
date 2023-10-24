@@ -1,6 +1,13 @@
-import { TransformedUser, User } from "../../types/types";
+import { UserDto } from "../../types/dtos/user";
+import { UserModel } from "../../types/models/user";
 
-const transformUser = ({ id, email, first_name, last_name, avatar }: User) => ({
+const transformUser = ({
+  id,
+  email,
+  first_name,
+  last_name,
+  avatar,
+}: UserDto): UserModel => ({
   id,
   email,
   firstName: first_name,
@@ -8,5 +15,5 @@ const transformUser = ({ id, email, first_name, last_name, avatar }: User) => ({
   avatar,
 });
 
-export const transformUsers = (users: User[]): TransformedUser[] =>
+export const transformUsers = (users: Array<UserDto>) =>
   users.map(transformUser);

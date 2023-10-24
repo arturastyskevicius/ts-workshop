@@ -1,5 +1,10 @@
-import axios, { AxiosResponse } from "axios";
-import { User } from "../types/types";
+import axios from "axios";
+import { GetUsersResponse } from "../types/responses";
 
-export const getUsers = (): Promise<AxiosResponse<{ data: User[] }>> =>
-  axios.get("https://reqres.in/api/users");
+// MINE
+// export const getUsers = (): Promise<AxiosResponse<{ data: User[] }>> =>
+//   axios.get("https://reqres.in/api/users");
+
+// VINTED
+export const getUsers = () =>
+  axios.get<GetUsersResponse>("https://reqres.in/api/users");

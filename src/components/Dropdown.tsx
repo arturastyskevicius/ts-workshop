@@ -1,17 +1,22 @@
-import { SortOption } from "../types/types";
+import { ChangeEvent } from "react";
 
-type DropdownProps = {
-  options: SortOption[];
-  selectedValue: string;
-  onSelectedChange: React.Dispatch<React.SetStateAction<string>>;
+type Option<T> = {
+  value: T;
+  title: string;
 };
 
-const Dropdown = ({
+type Props<T> = {
+  options: Readonly<Array<Option<T>>>;
+  selectedValue: T;
+  onSelectedChange: (value: T) => void;
+};
+
+const Dropdown = <T extends string>({
   options,
   selectedValue,
   onSelectedChange,
-}: DropdownProps) => {
-  const renderOption = ({ value, title }: SortOption) => {
+}: Props<T>) => {
+  const renderOption = ({ value, title }: Option<T>) => {
     return (
       <option key={value} value={value}>
         {title}
@@ -19,8 +24,8 @@ const Dropdown = ({
     );
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    onSelectedChange(event.target.value);
+  const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    onSelectedChange(event.target.value as T);
   };
 
   return (
